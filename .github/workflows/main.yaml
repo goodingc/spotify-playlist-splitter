@@ -21,7 +21,7 @@ jobs:
       - name: Zip
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -qq -r ../bundle.zip *.*
+          args: zip -qq -r ../bundle.zip .
           working-directory: ./backend/build
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
