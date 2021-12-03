@@ -22,6 +22,7 @@ jobs:
         uses: montudor/action-zip@v0.1.0
         with:
           args: zip -qq -r ./backend/bundle.zip ./backend/build
+      - uses: lhotari/action-upterm@v1
       - name: Deploy
         uses: appleboy/lambda-action@master
         with:
