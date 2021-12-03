@@ -18,11 +18,11 @@ jobs:
         run: |
           cd backend
           yarn run tsc index.ts --outDir build
-      - name: Zip
+      - name: Install Zip
         uses: montudor/action-zip@v0.1.0
-        with:
-          args: zip -qq -r ./backend/bundle.zip .
-          working-directory: ./backend/build
+      - name: Zip
+        run: zip -qq -r ./backend/bundle.zip .
+        working-directory: ./backend/build
       - name: Debug
         run: |
           ls
