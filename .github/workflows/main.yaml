@@ -1,0 +1,32 @@
+name: CI
+on: [ push]
+jobs:
+  deploy_backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Install dependencies
+        run: |
+          cd backend
+          yarn install
+      - name: Build
+        run: |
+          cd backend
+          yarn run tsc --outDir build
+      - name: Zip
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -qq -r ./backend/bundle.zip ./backend/build
+      - name: Deploy
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: eu-west-2
+          function_name: spotify-playlist-splitter-backend
+          zip_file: ./backend/bundle.zip
