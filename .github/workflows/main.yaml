@@ -23,6 +23,15 @@ jobs:
         with:
           args: zip -qq -r ./bundle.zip .
           working-directory: ./backend/build
+      - name: Debug
+        run: |
+          ls
+          cd backend
+          echo ===BACKEND===
+          ls
+          cd build
+          echo ===BUILD===
+          ls
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
