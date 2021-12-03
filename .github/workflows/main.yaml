@@ -22,11 +22,12 @@ jobs:
         uses: montudor/action-zip@v0.1.0
         with:
           args: zip -qq -r ./backend/bundle.zip ./backend/build
-      - name: Debug
-        run: |
-          ls
-          cd backend
-          ls
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: bundle-artifact
+          path: ./backend/bundle.zip
+          retention-days: 1
       - name: Deploy
         uses: appleboy/lambda-action@master
         with:
