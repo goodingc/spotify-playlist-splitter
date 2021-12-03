@@ -21,13 +21,13 @@ jobs:
       - name: Zip
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -qq -r ../bundle.zip .
+          args: zip -qq -r ./bundle.zip .
           working-directory: ./backend/build
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: bundle-artifact
-          path: ./backend/bundle.zip
+          path: ./backend/build/bundle.zip
           retention-days: 1
       - name: Deploy
         uses: appleboy/lambda-action@master
@@ -36,4 +36,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: eu-west-2
           function_name: spotify-playlist-splitter-backend
-          zip_file: ./backend/bundle.zip
+          zip_file: ./backend/build/bundle.zip
