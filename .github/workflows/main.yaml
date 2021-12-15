@@ -14,13 +14,13 @@ jobs:
         run: |
           cd backend
           yarn install
-      - name: Build
+      - name: Build Backend
         run: |
           cd backend
-          yarn run tsc index.ts --outDir build
+          yarn run build
       - name: Install Zip
         uses: montudor/action-zip@v0.1.0
-      - name: Zip
+      - name: Zip Backend
         run: zip -qq -r ./bundle.zip .
         working-directory: ./backend/build
 #      - name: Debug
@@ -46,8 +46,13 @@ jobs:
           aws_region: eu-west-2
           function_name: spotify-playlist-splitter-backend
           zip_file: ./backend/build/bundle.zip
+      - name: Build Frontend
+        run: |
+          cd frontend
+          yarn install
+          yarn run build
       - name: Deploy Frontend
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./frontend/.nuxt/dist
