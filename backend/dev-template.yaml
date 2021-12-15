@@ -1,0 +1,26 @@
+Resources:
+  API:
+    Type: "AWS::Serverless::Api"
+    Properties:
+      StageName: Prod
+      Cors:
+        AllowMethods: "'POST'"
+        AllowHeaders: "'Content-Type'"
+        AllowOrigin: "'*'"
+        MaxAge: "'600'"
+        AllowCredentials: true
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 300
+      MemorySize: 256
+      Handler: bundle.handler
+      CodeUri: ./build
+      Runtime: nodejs14.x
+      Events:
+        ApiRequest:
+          Type: Api
+          Properties:
+            Path: /
+            Method: POST
+            RestApiId: !Ref API

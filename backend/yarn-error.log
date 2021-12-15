@@ -1,0 +1,47 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js run dev
+
+PATH: 
+  C:\Python37\Scripts\;C:\Python37\;C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Program Files\PerkinElmerInformatics\ChemOffice2020\ChemScript\Lib;C:\Python39\Scripts\;C:\Python39\;C:\Python27\;C:\Python27\Scripts;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\MATLAB\R2021a\bin;C:\Program Files\Microsoft VS Code\bin;C:\Android\android-sdk\tools\bin;C:\Program Files\dotnet\;C:\Program Files\NASM;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Program Files (x86)\LPSolve;C:\tools\php80;C:\tools\Anaconda3\condabin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Users\callu\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\qemu;C:\Program Files\Amazon\AWSCLIV2\;C:\Program Files\Go\bin;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\PuTTY\;C:\Program Files\Amazon\AWSSAMCLI\bin\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Amazon\AWSSAMCLI\runtime\Scripts;C:\Users\callu\.cargo\bin;C:\Users\callu\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Oracle\VirtualBox;C:\tools\dart-sdk\bin;C:\Users\callu\AppData\Roaming\Pub\Cache\bin;C:\tools\flutter\bin;C:\tools\bin;C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin;C:\tools\TinyTeX\bin\win32;C:\Users\callu\AppData\Roaming\npm;C:\Users\callu\go\bin;C:\Users\callu\AppData\Roaming\cabal\bin;C:\tools\ghc-9.0.1\bin;C:\Users\callu\AppData\Local\Yarn\bin
+
+Yarn version: 
+  1.22.15
+
+Node version: 
+  14.16.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: C:\Users\callu\Documents\Programming\spotify-playlist-splitter\backend\package.json: Unexpected string in JSON at position 188
+      at JSON.parse (<anonymous>)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\Program Files (x86)\Yarn\lib\cli.js:310:30)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "backend",
+    "version": "1.0.0",
+    "scripts": {
+      "old-dev": "start \"%cd%\" npx tsc index.ts --watch --outDir build && sam local start-api -p 3001 -t dev-template.yaml"
+      "dev": "sam local start-api -p 3001 -t dev-template.yaml"
+    },
+    "dependencies": {
+      "node-fetch": "^3.1.0"
+    },
+    "devDependencies": {
+      "typescript": "^4.5.2",
+      "webpack": "^5.64.4",
+      "ts-loader": "^9.2.6",
+      "webpack-cli": "^4.9.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
