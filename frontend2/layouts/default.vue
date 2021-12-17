@@ -1,0 +1,58 @@
+<template>
+  <div>
+    <b-navbar variant="light">
+      <b-button
+        variant="outline-secondary"
+        v-b-toggle.sidebar
+      >
+        <font-awesome-icon icon="bars" />
+      </b-button>
+      <b-navbar-brand v-if="spotifyStore.me" class="ml-3 d-none d-sm-inline">
+        {{ spotifyStore.me.display_name }}
+      </b-navbar-brand>
+      <b-navbar-brand class="ml-auto">Spotify Playlist Splitter</b-navbar-brand>
+    </b-navbar>
+    <login-page v-if="shouldLogin" />
+    <b-container fluid v-else>
+      <sidebar />
+      <b-row>
+        <nuxt />
+      </b-row>
+    </b-container>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from "vue";
+import { spotifyStore } from "~/store";
+
+export default Vue.extend({
+  name: "default",
+  data() {
+    return {
+      redirecting: false,
+      shouldLogin: false,
+      sidebarOpen: false,
+      spotifyStore
+    };
+  },
+  created() {
+    this.setValues();
+  },
+  watch: {
+    "$route.path"() {
+      this.setValues();
+    }
+  },
+  methods: {
+    setValues() {
+      this.redirecting = this.$route.path === "/redirect";
+      this.shouldLogin = !this.spotifyStore.hasAccessToken && !this.redirecting;
+    }
+  }
+});
+</script>
+
+<style scoped>
+
+</style>
