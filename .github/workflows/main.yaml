@@ -17,7 +17,7 @@ jobs:
       - name: Build Backend
         run: |
           cd backend
-          yarn run build
+          yarn build
       - name: Install Zip
         uses: montudor/action-zip@v0.1.0
       - name: Zip Backend
@@ -48,11 +48,11 @@ jobs:
           zip_file: ./backend/build/bundle.zip
       - name: Build Frontend
         run: |
-          cd frontend
+          cd frontend2
           yarn install
-          yarn run build
+          yarn generate
       - name: Deploy Frontend
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend/.nuxt/dist
+          publish_dir: ./frontend2/dist

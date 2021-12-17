@@ -16,31 +16,32 @@
     </b-col>
   </b-row>
   <b-row>
-      <b-col v-for="cluster of clusters">
-        <b-list-group>
-          <b-list-group-item v-for="[track, features] of cluster">
-            <b-row>
-              <b-col cols="auto">
-                <b-img
-                    fluid
-                    :src="track.track.album.images[0].url"
-                    width="50"
-                    height="50"
-                />
-              </b-col>
-              <b-col>
-                <div class="d-flex w-100">
-                  <h5 class="me-auto">{{ track.track.name }}</h5>
-                </div>
-                <div class="d-flex w-100">
-                  <h6 class="me-auto">{{ track.track.artists[0].name }}</h6>
+    <b-col v-for="cluster of clusters">
+      <b-list-group>
+        <b-list-group-item v-for="[track, features] of cluster">
+          <b-row>
+            <b-col cols="auto">
+              <b-img
+                  fluid
+                  :src="track.track.album.images[0].url"
+                  width="50"
+                  height="50"
+              />
+            </b-col>
+            <b-col>
+              <div class="d-flex w-100">
+                <h5 class="me-auto">{{ track.track.name }}</h5>
+              </div>
+              <div class="d-flex w-100">
+                <h6 class="me-auto">{{ track.track.artists[0].name }}</h6>
+                <client-only>
                   <svg
                       v-for="[emoji, label, value] in getFeatureData(features)"
                       v-b-tooltip :title="`${label}: ${Math.round(value * 100)}%`"
                       class="ms-1"
                       height="30" width="30" viewBox="0 0 40 40"
                   >
-                    <circle r="50%" cx="50%" cy="50%" fill="var(--bs-secondary)" />
+                    <circle r="50%" cx="50%" cy="50%" fill="var(--bs-secondary)"/>
                     <circle r="25%" cx="-50%" cy="50%" fill="transparent"
                             stroke="var(--bs-primary)"
                             stroke-width="50%"
@@ -48,14 +49,15 @@
                             transform="rotate(-90)"/>
                     <text dominant-baseline="middle" text-anchor="middle" x="50%" y="50%">{{ emoji }}</text>
                   </svg>
-                </div>
-              </b-col>
-            </b-row>
+                </client-only>
+              </div>
+            </b-col>
+          </b-row>
 
 
-          </b-list-group-item>
-        </b-list-group>
-      </b-col>
+        </b-list-group-item>
+      </b-list-group>
+    </b-col>
   </b-row>
 </template>
 

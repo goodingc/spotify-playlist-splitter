@@ -1,7 +1,5 @@
 <template>
-  <nuxt-link
-      to="/"
-  >
+  <nuxt-link to="/">
     <h1 v-if="user">{{ user.display_name }}</h1>
   </nuxt-link>
   <b-list-group>
@@ -19,16 +17,19 @@
 
 <script setup lang="ts">
 import SpotifyWebApi from "spotify-web-api-js";
+import {useState} from "#app";
 
-let user = ref();
-const playlists = ref<null |  SpotifyApi.PlaylistObjectSimplified[]>(null)
-const spotify = useState<SpotifyWebApi.SpotifyWebApiJs>('spotify');
-
-if (spotify.value) {
-  user.value = await spotify.value.getMe()
-  playlists.value = (await spotify.value.getUserPlaylists()).items
-  console.log(user)
-  console.log(playlists)
-}
+const user = useState<SpotifyApi.CurrentUsersProfileResponse>('user');
+const playlists = useState<SpotifyApi.PlaylistObjectSimplified[]>('playlists');
+// const spotify = useState<SpotifyWebApi.SpotifyWebApiJs>('spotify');
+//
+// if (spotify.value) {
+//   if (!user.value) {
+//     user.value = await spotify.value.getMe()
+//   }
+//   if(!playlists.value) {
+//     playlists.value = (await spotify.value.getUserPlaylists()).items
+//   }
+// }
 
 </script>

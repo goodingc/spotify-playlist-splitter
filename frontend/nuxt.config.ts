@@ -6,10 +6,11 @@ export default defineNuxtConfig({
         'bootstrap/dist/css/bootstrap.css',
         'bootstrap-vue-3/dist/bootstrap-vue-3.css'
     ],
-    ssr: false,
-    mode: 'development',
-    target: 'static',
+    // ssr: false,
     router: {
         base: '/'
+    },
+    nitro: {
+        preset: 'browser'
     }
 })
