@@ -1,3 +1,6 @@
 # Project exclude paths
 /backend/node_modules/
 /node_modules/
+/backend/build/
+/frontend2/dist/
+/frontend2/.nuxt/

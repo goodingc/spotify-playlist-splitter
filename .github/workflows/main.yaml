@@ -10,13 +10,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - name: Install dependencies
-        run: |
-          cd backend
-          yarn install
       - name: Build Backend
         run: |
           cd backend
+          yarn install
           yarn build
       - name: Install Zip
         uses: montudor/action-zip@v0.1.0

@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "scripts": {
-    "old-dev": "start \"%cd%\" npx tsc index.ts --watch --outDir build && sam local start-api -p 3001 -t dev-template.yaml",
+    "watch-dev": "start \"%cd%\" npx webpack --watch && yarn dev",
     "dev": "sam local start-api -p 3001 -t dev-template.yaml",
-    "build": "tsc index.ts --outDir build"
+    "build": "webpack"
   },
   "dependencies": {
     "node-fetch": "^3.1.0"
