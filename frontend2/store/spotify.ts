@@ -27,6 +27,8 @@ export default class SpotifyStore extends VuexModule {
   playlistDetails: Map<string, Playlist> = new Map()
   trackFeatures: Map<string, AudioFeatures> = new Map()
 
+  redirectUri?: string
+
   get hasAccessToken() {
     return this.spotify.getAccessToken() !== ''
   }

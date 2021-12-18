@@ -14,7 +14,10 @@ export default Vue.extend({
   name: "redirect",
   created() {
     console.log(this.$route.query.code);
-    this.$call('get-access-token', this.$route.query.code)
+    this.$call('get-access-token', {
+      code: this.$route.query.code,
+      redirectUri: spotifyStore.redirectUri
+    })
     .then(async (response) => {
       spotifyStore.setAccessToken(response.access_token)
       await spotifyStore.setDetails()

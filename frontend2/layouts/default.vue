@@ -37,6 +37,7 @@ export default Vue.extend({
     };
   },
   created() {
+    this.spotifyStore.redirectUri = (this.$config.publicPath || 'http://' + location.host) + '/redirect/'
     this.setValues();
   },
   watch: {
@@ -46,8 +47,9 @@ export default Vue.extend({
   },
   methods: {
     setValues() {
-      this.redirecting = this.$route.path === "/redirect";
+      this.redirecting = this.$route.path.replaceAll('/', '') === "redirect";
       this.shouldLogin = !this.spotifyStore.hasAccessToken && !this.redirecting;
+      console.log(this.$route.path, this.spotifyStore.hasAccessToken)
     }
   }
 });
