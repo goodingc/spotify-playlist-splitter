@@ -13,6 +13,7 @@ import {spotifyStore} from '~/store'
 export default Vue.extend({
   name: "redirect",
   created() {
+    console.log(this.$route.query.code);
     this.$call('get-access-token', this.$route.query.code)
     .then(async (response) => {
       spotifyStore.setAccessToken(response.access_token)
