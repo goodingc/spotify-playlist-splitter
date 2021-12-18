@@ -69,6 +69,6 @@ export default {
   },
 
   router: {
-    base: process.env.BASE_PATH,
+    base: process.env.BASE_PATH + '/',
   },
 }
