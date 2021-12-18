@@ -63,4 +63,8 @@ export default {
   build: {
     publicPath: process.env.PUBLIC_PATH,
   },
+
+  publicRuntimeConfig: {
+    publicPath: process.env.PUBLIC_PATH,
+  },
 }
