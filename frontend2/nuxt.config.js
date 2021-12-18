@@ -61,10 +61,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    publicPath: process.env.PUBLIC_PATH,
+    publicPath: process.env.PUBLIC_HOST + process.env.BASE_PATH,
   },
 
   publicRuntimeConfig: {
-    publicPath: process.env.PUBLIC_PATH,
+    publicPath: process.env.PUBLIC_HOST + process.env.BASE_PATH,
+  },
+
+  router: {
+    base: process.env.BASE_PATH,
   },
 }

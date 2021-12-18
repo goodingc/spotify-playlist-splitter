@@ -47,7 +47,8 @@ jobs:
         run: |
           cd frontend2
           yarn install
-          export PUBLIC_PATH=https://goodingc.github.io/spotify-playlist-splitter
+          export PUBLIC_HOST=https://goodingc.github.io
+          export BASE_PATH=/spotify-playlist-splitter/
           yarn generate
       - name: Deploy Frontend
         uses: peaceiris/actions-gh-pages@v3
