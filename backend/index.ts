@@ -18,17 +18,14 @@ export async function handler(event: any, context: any) {
   //         'Content-Type': 'application/json',
   //     },
   // };
-  const request: Request = JSON.parse(event.body);
 
-  if (!request || event.headers["Connection"] === "close") {
+  if (!event.body || event.headers["Connection"] === "close") {
     return {
-      statusCode: 400,
-      body: JSON.stringify("Bad request"),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      statusCode: 200,
     };
   }
+
+  const request: Request = JSON.parse(event.body);
 
   // console.log(JSON.stringify(context));
   // console.log(JSON.stringify(event));
