@@ -11,7 +11,7 @@
       </b-col>
       <b-col>
         <h1>{{ playlist.name }}</h1>
-        <h2>{{ playlist.description }}</h2>
+<!--        <h2>{{ playlist.description }}</h2>-->
       </b-col>
     </b-row>
     <b-row>

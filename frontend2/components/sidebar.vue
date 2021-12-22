@@ -2,7 +2,7 @@
   <b-sidebar id="sidebar">
     <b-list-group v-if="spotifyStore.hasDetails">
       <nuxt-link
-        v-for="playlist of spotifyStore.playlists.items"
+        v-for="playlist of spotifyStore.playlists"
         :key="playlist.id"
         :to="`/split?playlist=${playlist.id}`"
       >

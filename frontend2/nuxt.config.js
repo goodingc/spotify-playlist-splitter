@@ -24,7 +24,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['plugins/comms.client.ts', 'plugins/spotify.client.ts'],
+  plugins: ['plugins/comms.client.ts', 'plugins/vue-async-computed.client.ts'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -37,9 +37,7 @@ export default {
       '@nuxtjs/fontawesome',
       {
         icons: {
-          // if you have bought the Pro packages
-          // list the icons you want to add, not listed icons will be tree-shaked
-          solid: ['faBars'],
+          solid: ['faBars', 'faTimes', 'faPlus'],
         },
       },
     ],

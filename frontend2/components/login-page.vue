@@ -20,7 +20,7 @@ export default Vue.extend({
       window.location.href = `https://accounts.spotify.com/authorize?` +
         `client_id=${"ad1e08d3838e4a518096eddf000e1358"}&` +
         `response_type=code&redirect_uri=${spotifyStore.redirectUri}&` +
-        `scope=${"user-read-private user-read-email playlist-read-private playlist-read-collaborative"}&` +
+        `scope=${"user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public"}&` +
         `state=${state}`;
     }
   }

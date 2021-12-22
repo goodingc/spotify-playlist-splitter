@@ -18,8 +18,8 @@ export default Vue.extend({
   data() {
     return {
       splitters: [
-        "Date added",
-        'Features'
+        'Features',
+        'Artist Genre'
       ].map(name => [name, name.toLowerCase().replace(' ', '-')])
     }
   }

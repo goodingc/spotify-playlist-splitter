@@ -5,7 +5,7 @@
         <h1>Features</h1>
       </b-col>
     </b-row>
-    <b-row>
+    <b-row class="mb-3">
       <b-col cols="3">
         <label>Number of groups</label>
       </b-col>
@@ -13,20 +13,28 @@
         <b-form-input v-model.number="groupCount" type="number"></b-form-input>
       </b-col>
       <b-col cols="3">
-        <b-button @click="clusterTracks" class="w-100" variant="primary">Split</b-button>
+        <b-button @click="clusterTracks" class="w-100">Cluster</b-button>
+      </b-col>
+    </b-row>
+    <b-row class="mb-3">
+      <b-col>
+        <b-button @click="split" class="w-100" variant="primary" :disabled="clusters === undefined">
+          Split
+        </b-button>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
         <b-card-group columns>
           <b-card v-for="cluster of clusters">
+            <playlist-action v-model="cluster.action" />
             <b-list-group>
-              <b-list-group-item v-for="[track, features] of cluster">
+              <b-list-group-item v-for="track of cluster.tracks">
                 <b-row>
                   <b-col cols="auto">
                     <b-img
                       fluid
-                      :src="track.track.album.images[0].url"
+                      :src="track.item.track.album.images[0].url"
                       width="50"
                       height="50"
                     />
@@ -34,15 +42,15 @@
                   <b-col>
                     <b-row>
                       <b-col>
-                        <h5 class="me-auto">{{ track.track.name }}</h5>
+                        <h5 class="me-auto">{{ track.item.track.name }}</h5>
                       </b-col>
                     </b-row>
                     <b-row>
                       <b-col>
-                        <h6 class="me-auto">{{ track.track.artists[0].name }}</h6>
+                        <h6 class="me-auto">{{ track.item.track.artists[0].name }}</h6>
                       </b-col>
                       <b-col cols="auto" class="d-none d-sm-block">
-                        <feature-charts :features="features"></feature-charts>
+                        <feature-charts :features="track.features"></feature-charts>
                       </b-col>
                     </b-row>
 
@@ -52,7 +60,7 @@
                   <b-col>
                     <b-row>
                       <b-col cols="auto" class="ml-auto">
-                        <feature-charts :features="features"></feature-charts>
+                        <feature-charts :features="track.features"></feature-charts>
                       </b-col>
                     </b-row>
                   </b-col>
@@ -71,9 +79,17 @@ import { AudioFeatures, Playlist, PlaylistItem } from "spotify-web-api-ts/types/
 import Vue from "vue";
 import { spotifyStore } from "~/store";
 import { KMEANS } from "density-clustering";
+import { PlaylistAction } from "~/store/spotify";
+
+type Cluster = {
+  action: PlaylistAction
+  tracks: {
+    item: PlaylistItem
+    features: AudioFeatures
+  }[]
+};
 
 export default Vue.extend({
-  name: "features",
   data() {
     return {
       spotifyStore,
@@ -81,7 +97,7 @@ export default Vue.extend({
       playlist: undefined as undefined | Playlist,
       features: undefined as undefined | AudioFeatures[],
       clusterData: undefined as undefined | number[][],
-      clusters: undefined as undefined | [PlaylistItem, AudioFeatures][][]
+      clusters: undefined as undefined | Cluster[]
     };
   },
   async fetch() {
@@ -95,12 +111,28 @@ export default Vue.extend({
     clusterTracks() {
       if (!this.clusterData || !this.playlist || !this.features) return;
       this.clusters = new KMEANS().run(this.clusterData, this.groupCount)
-        .map(cluster => cluster.map(
-          trackIndex => {
-            return [this.playlist!.tracks.items[trackIndex], this.features![trackIndex]];
-          }
-        ));
+        .map<Cluster>(cluster => {
+          return {
+            action: {
+              type: 'none',
+            },
+            tracks: cluster.map(
+              trackIndex => {
+                return {
+                  item: this.playlist!.tracks.items[trackIndex],
+                  features: this.features![trackIndex]
+                };
+              }
+            )
+          };
+        });
     },
+    async split() {
+      await this.spotifyStore.executePlaylistActions(this.clusters!.map(cluster => ({
+        action: cluster.action,
+        tracks: cluster.tracks.map(track => track.item)
+      })));
+    }
   }
 });
 </script>

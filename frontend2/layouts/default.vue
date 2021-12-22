@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar variant="light">
+    <b-navbar variant="light" class="mb-3">
       <b-button
         variant="outline-secondary"
         v-b-toggle.sidebar
